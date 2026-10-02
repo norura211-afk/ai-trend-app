@@ -1,0 +1,39 @@
+# 毎朝7時(日本時間)に記事を集めて、サイトを作り直して公開する
+name: 記事更新と公開
+
+on:
+  schedule:
+    - cron: '0 22 * * *' # UTC 22:00 = 日本時間 7:00
+  workflow_dispatch: # 手動でも実行できる
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run fetch
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,102 @@
+.app {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 1.6rem;
+  color: #5ee6ff;
+  letter-spacing: 0.05em;
+}
+
+.date {
+  margin: 4px 0 20px;
+  color: #8ea2c8;
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.tab {
+  padding: 8px 14px;
+  border: 1px solid #1f2b4a;
+  border-radius: 6px;
+  background: transparent;
+  color: #8ea2c8;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.15s;
+}
+
+.tab:hover {
+  border-color: #5ee6ff88;
+  color: #cfe9f5;
+}
+
+.tab.active {
+  background: #12324a;
+  border-color: #5ee6ff;
+  color: #5ee6ff;
+  box-shadow: 0 0 10px #5ee6ff55;
+}
+
+.content h2 {
+  margin: 0;
+  color: #e6edf7;
+}
+
+.desc {
+  margin: 4px 0 16px;
+  color: #8ea2c8;
+}
+
+.card {
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  border: 1px solid #1f2b4a;
+  border-left: 3px solid #5ee6ff;
+  border-radius: 8px;
+  background: #121a33;
+  color: #e6edf7;
+}
+
+.card h3 {
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+}
+
+.card p {
+  margin: 0 0 8px;
+  color: #c3cfe6;
+}
+
+.card h3 a {
+  color: #e6edf7;
+  text-decoration: none;
+}
+
+.card h3 a:hover {
+  color: #5ee6ff;
+  text-decoration: underline;
+}
+
+.notice {
+  padding: 14px 16px;
+  border: 1px dashed #1f2b4a;
+  border-radius: 8px;
+  color: #8ea2c8;
+}
+
+.notice code {
+  color: #5ee6ff;
+}
+
+.card small {
+  color: #8ea2c8;
+}
