@@ -2,7 +2,7 @@
 // 実行: npm run fetch
 import { XMLParser } from 'fast-xml-parser'
 import { mkdir, writeFile } from 'node:fs/promises'
-import { FEEDS, MAX_PER_CATEGORY } from './feeds.js'
+import { FEEDS, MAX_PER_CATEGORY, MAX_OVERRIDE } from './feeds.js'
 
 const parser = new XMLParser({ ignoreAttributes: false, attributeNamePrefix: '@_' })
 
@@ -62,6 +62,7 @@ async function fetchFeed(feed) {
   return items
     .filter((i) => i.title && i.url)
     .filter((i) => !feed.filter || feed.filter.test(`${i.title} ${i.excerpt}`))
+    .filter((i) => !feed.exclude || !feed.exclude.test(`${i.title} ${i.excerpt}`))
     .map((i) => ({ ...i, category: feed.category, source: feed.source }))
 }
 
@@ -86,7 +87,7 @@ all
   .sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''))
   .forEach((a) => {
     const list = (byCategory[a.category] ??= [])
-    if (list.length < MAX_PER_CATEGORY) list.push(a)
+    if (list.length < (MAX_OVERRIDE[a.category] ?? MAX_PER_CATEGORY)) list.push(a)
   })
 
 await mkdir('public', { recursive: true })

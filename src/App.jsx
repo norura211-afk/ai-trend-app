@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
 import './App.css'
+import Guide from './Guide.jsx'
 
 // カテゴリの一覧。あとから増やしやすいようにデータとして分けている
 // (id は scripts/feeds.js の category と合わせる)
 const CATEGORIES = [
   { id: 'tech', label: '技術ニュース', icon: '🧠', desc: '新モデル・論文・ツールの発表' },
   { id: 'usecase', label: '話題の活用事例', icon: '💡', desc: 'SNSなどで注目されている使い方' },
+  { id: 'guide', label: '使いこなしガイド', icon: '📚', desc: 'Claude・ChatGPT・Geminiの機能と時短ワザ(いつ見ても役立つ基本)', isGuide: true },
   { id: 'economy', label: '経済・世界情勢', icon: '🌏', desc: '株・規制・国際動向' },
   { id: 'gear', label: '買うもの・機材', icon: '🖥️', desc: 'GPU・自宅サーバーなどの環境づくり' },
 ]
@@ -60,15 +62,19 @@ function App() {
         <h2>{active.icon} {active.label}</h2>
         <p className="desc">{active.desc}</p>
 
-        {error && (
+        {active.isGuide && <Guide />}
+
+        {!active.isGuide && error && (
           <p className="notice">
             記事データがありません。ターミナルで <code>npm run fetch</code> を実行してください。
           </p>
         )}
-        {!error && !data && <p className="notice">読み込み中...</p>}
-        {data && articles.length === 0 && <p className="notice">このカテゴリの記事はまだありません。</p>}
+        {!active.isGuide && !error && !data && <p className="notice">読み込み中...</p>}
+        {!active.isGuide && data && articles.length === 0 && (
+          <p className="notice">このカテゴリの記事はまだありません。</p>
+        )}
 
-        {articles.map((a) => (
+        {!active.isGuide && articles.map((a) => (
           <article key={a.url} className="card">
             <h3>
               <a href={a.url} target="_blank" rel="noreferrer">{a.title}</a>

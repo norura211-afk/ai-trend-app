@@ -97,6 +97,72 @@
   color: #5ee6ff;
 }
 
+/* 使いこなしガイド */
+.subtabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.subtab {
+  padding: 6px 14px;
+  border: 1px solid #1f2b4a;
+  border-radius: 999px;
+  background: transparent;
+  color: #8ea2c8;
+  cursor: pointer;
+}
+
+.subtab.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: #121a33;
+}
+
+.guide-head {
+  padding: 14px 16px;
+  margin-bottom: 8px;
+  border: 1px solid #1f2b4a;
+  border-top: 3px solid var(--accent);
+  border-radius: 8px;
+  background: #121a33;
+}
+
+.guide-head h3 {
+  margin: 0 0 6px;
+  color: var(--accent);
+}
+
+.guide-head h3 small {
+  margin-left: 6px;
+  color: #8ea2c8;
+  font-weight: normal;
+}
+
+.guide-head p {
+  margin: 0 0 8px;
+  color: #c3cfe6;
+}
+
+.guide-head a {
+  color: var(--accent);
+}
+
+.guide-sub {
+  margin: 20px 0 8px;
+  color: #8ea2c8;
+  font-size: 0.95rem;
+}
+
+.guide-card {
+  border-left-color: var(--accent);
+}
+
+.guide-card.tip {
+  border-left-style: dashed;
+}
+
 .card small {
   color: #8ea2c8;
 }
