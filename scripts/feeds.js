@@ -62,6 +62,6 @@ export const FEEDS = [
 
 // 1カテゴリあたり、最大で何件残すか(カテゴリごとに変えたいときは MAX_OVERRIDE へ)
 export const MAX_PER_CATEGORY = 20
-export const MAX_OVERRIDE = { usecase: 60 }
+export const MAX_OVERRIDE = { usecase: 80 }
 // 1つの取得元(例: note ChatGPT活用)から出す最大件数
-export const MAX_PER_SOURCE = 6
+export const MAX_PER_SOURCE = 4
