@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import Guide from './Guide.jsx'
+import Spotlight from './Spotlight.jsx'
 
 // カテゴリの一覧。あとから増やしやすいようにデータとして分けている
 // (id は scripts/feeds.js の category と合わせる)
 const CATEGORIES = [
+  { id: 'today', label: '今日の活用例', icon: '🎯', desc: '毎日3つの機能を、業種や場面ごとの具体例で紹介', isSpotlight: true },
   { id: 'tech', label: '技術ニュース', icon: '🧠', desc: '新モデル・論文・ツールの発表' },
   { id: 'usecase', label: '話題の活用事例', icon: '💡', desc: 'SNSなどで注目されている使い方' },
   { id: 'guide', label: '使いこなしガイド', icon: '📚', desc: 'Claude・ChatGPT・Geminiの機能と時短ワザ(いつ見ても役立つ基本)', isGuide: true },
@@ -32,6 +34,8 @@ function App() {
 
   const active = CATEGORIES.find((c) => c.id === activeId)
   const articles = data?.articles?.[activeId] ?? []
+  // 記事ではなく、固定の内容を出すタブ(ガイド・今日の活用例)
+  const isStatic = active.isGuide || active.isSpotlight
   const today = new Date().toLocaleDateString('ja-JP', {
     year: 'numeric', month: 'long', day: 'numeric', weekday: 'short',
   })
@@ -63,18 +67,19 @@ function App() {
         <p className="desc">{active.desc}</p>
 
         {active.isGuide && <Guide />}
+        {active.isSpotlight && <Spotlight articles={data?.articles?.usecase ?? []} />}
 
-        {!active.isGuide && error && (
+        {!isStatic && error && (
           <p className="notice">
             記事データがありません。ターミナルで <code>npm run fetch</code> を実行してください。
           </p>
         )}
-        {!active.isGuide && !error && !data && <p className="notice">読み込み中...</p>}
-        {!active.isGuide && data && articles.length === 0 && (
+        {!isStatic && !error && !data && <p className="notice">読み込み中...</p>}
+        {!isStatic && data && articles.length === 0 && (
           <p className="notice">このカテゴリの記事はまだありません。</p>
         )}
 
-        {!active.isGuide && articles.map((a) => (
+        {!isStatic && articles.map((a) => (
           <article key={a.url} className="card">
             <h3>
               <a href={a.url} target="_blank" rel="noreferrer">{a.title}</a>
