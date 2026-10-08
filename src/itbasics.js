@@ -14,8 +14,8 @@ export const FIELDS = [
         title: 'CPU・メモリ・ストレージの違い',
         body: 'この3つは、よく「机と本棚と人」にたとえられる。',
         points: [
-          'CPU = 頭脳。計算や処理をする「作業する人」。速いほど、いろいろな処理がサクサク進む。',
-          'メモリ(RAM) = 作業机の広さ。広いほど、アプリやタブを同時にたくさん開いても重くならない。電源を切ると、中身は消える。',
+          'CPU(Central Processing Unit = 中央処理装置)= 頭脳。計算や処理をする「作業する人」。速いほど、いろいろな処理がサクサク進む。',
+          'メモリ(RAM = Random Access Memory)= 作業机の広さ。広いほど、アプリやタブを同時にたくさん開いても重くならない。電源を切ると、中身は消える。',
           'ストレージ = 本棚・倉庫。写真や文書、アプリを保存しておく場所。電源を切っても残る。',
           '「動作が重い」ときは、机(メモリ)が足りないことが多い。「保存できない」ときは、本棚(ストレージ)がいっぱい。',
           '目安: 普通の事務作業ならメモリ8〜16GB。動画編集やAI利用では、32GB以上あると余裕が出る。',
@@ -25,18 +25,18 @@ export const FIELDS = [
         title: 'SSDとHDD',
         body: 'どちらもストレージ(保存場所)の種類。',
         points: [
-          'SSD = 半導体に保存する。速く、静かで、衝撃にも強い。今のPCはSSDが主流。',
-          'HDD = 円盤を回して保存する。安くて大容量だが、遅く、動作音がある。',
+          'SSD(Solid State Drive = 固体ドライブ)= 半導体に保存する。動く部品がないので Solid State。速く、静かで、衝撃にも強い。今のPCはSSDが主流。',
+          'HDD(Hard Disk Drive)= 硬い円盤(ディスク)を回して保存する。安くて大容量だが、遅く、動作音がある。',
           'パソコンの起動やアプリの立ち上がりの速さは、SSDかどうかで大きく変わる。',
           'HDDは、写真や動画をたくさん保管する「倉庫」として今も使われる。',
         ],
       },
       {
         title: 'GPUとVRAM',
-        body: 'GPUは、画像や映像を計算するための専用部品。',
+        body: 'GPU(Graphics Processing Unit = 画像処理装置)は、画像や映像を計算するための専用部品。',
         points: [
           'もともとはゲームや映像のために作られたが、AIの計算にも向いていて、今は重要な部品になっている。',
-          'VRAM = GPU専用のメモリ。AIモデルを動かすときに、このサイズが大事になる(第11分野で詳しく説明)。',
+          'VRAM(Video RAM)= GPU専用のメモリ。AIモデルを動かすときに、このサイズが大事になる(第11分野で詳しく説明)。',
           '内蔵GPU = CPUに入っている。普通の事務作業なら十分。専用GPU = 別の部品として付く。ゲーム・動画・AIに強い。',
         ],
       },
@@ -79,7 +79,7 @@ export const FIELDS = [
     lessons: [
       {
         title: 'OSとは何か',
-        body: 'OS(オーエス)は、パソコンの基本ソフト。アプリを動かす土台。',
+        body: 'OS(Operating System)は、パソコンの基本ソフト。アプリを動かす土台。',
         points: [
           'Windows = 多くの会社・家庭で使われる。ソフトや周辺機器の選択肢が広い。',
           'macOS = Appleの製品用。デザインや動画制作で人気。',
@@ -240,7 +240,7 @@ export const FIELDS = [
       },
       {
         title: 'APIとは',
-        body: 'ソフト同士が会話するための「窓口」。',
+        body: 'API(Application Programming Interface)は、ソフト同士が会話するための「窓口」。Interface = 接点・窓口。',
         points: [
           'たとえば、天気アプリは、気象のAPIにお願いして、天気を受け取っている。',
           'ClaudeやChatGPTも、APIを使うと、自分のアプリに組み込める。',
@@ -272,7 +272,7 @@ export const FIELDS = [
         points: [
           'クラウド型(ChatGPT、Claudeなど) = 事業者の巨大なコンピューターで動く。自分のPCは高性能でなくていい。インターネットが必要。',
           'ローカル型(ローカルLLM) = 自分のPCの中で動く。インターネットなしでも動き、入力内容が外に出ない。ただし、PCの性能が必要。',
-          'LLM(大規模言語モデル) = 文章を理解して作るAIの仕組み。ChatGPTなどの中身。',
+          'LLM(Large Language Model = 大規模言語モデル)= 文章を理解して作るAIの仕組み。ChatGPTなどの中身。',
         ],
       },
       {
@@ -370,6 +370,64 @@ export const GLOSSARY = [
   { term: 'ローカルLLM', field: 'ai-pc', body: '自分のPCの中で動かすLLM。' },
   { term: 'モデル', field: 'ai-pc', body: 'AIの「頭脳」にあたるデータの塊。ファイルとして配布される。' },
   { term: 'ユニファイドメモリ', field: 'ai-pc', body: 'CPUとGPUがメモリを共有する設計。Appleの最近のMacで採用されている。' },
+  { term: 'PC', field: 'hardware', body: 'パソコン。個人が使うコンピューター。', abbr: { full: 'Personal Computer', ja: '個人用コンピューター' } },
+  { term: 'IT', field: 'dev', body: '情報技術。コンピューターや通信の技術全般。', abbr: { full: 'Information Technology', ja: '情報技術' } },
+  { term: 'AI', field: 'ai-pc', body: '人間のような知的な処理をするコンピューターの技術。', abbr: { full: 'Artificial Intelligence', ja: '人工知能' } },
+  { term: 'GB / TB', field: 'hardware', body: 'データの大きさの単位。1TBは約1000GB。', abbr: { full: 'Gigabyte / Terabyte', ja: 'ギガバイト / テラバイト', note: 'byte(バイト)はデータの基本の単位。G=10億、T=1兆の意味。' } },
+  { term: 'USB', field: 'hardware', body: '周辺機器をつなぐ、標準的な接続口。', abbr: { full: 'Universal Serial Bus', ja: '汎用の直列(1本ずつ送る)バス', note: 'Universal=万能の、Bus=データの通り道。' } },
+  { term: 'HDMI', field: 'hardware', body: '映像と音声を1本のケーブルで送る接続規格。', abbr: { full: 'High-Definition Multimedia Interface', ja: '高精細マルチメディアの接点' } },
+  { term: 'LAN', field: 'security', body: '家や会社などの、狭い範囲のネットワーク。', abbr: { full: 'Local Area Network', ja: '限られた範囲のネットワーク' } },
+  { term: 'IPアドレス', field: 'security', body: 'ネットワーク上の機器につける、住所のような番号。', abbr: { full: 'Internet Protocol address', ja: 'インターネットの通信規約で使う住所' } },
+  { term: 'DNS', field: 'security', body: 'サイトの名前(例: example.com)を、IPアドレスに変換する仕組み。', abbr: { full: 'Domain Name System', ja: 'ドメイン名の仕組み', note: '「インターネットの電話帳」とも例えられる。' } },
+  { term: 'URL', field: 'dev', body: 'Webページの住所。https://... で始まる文字。', abbr: { full: 'Uniform Resource Locator', ja: '統一された資源の所在表記' } },
+  { term: 'PDF', field: 'os', body: 'どの環境でも、同じ見た目で表示できる文書形式。', abbr: { full: 'Portable Document Format', ja: '持ち運べる文書形式' } },
+  { term: 'CSV', field: 'os', body: 'カンマ(,)で区切った、表のデータを保存する形式。Excelで開ける。', abbr: { full: 'Comma-Separated Values', ja: 'カンマで区切られた値' } },
+  { term: 'RPA', field: 'dev', body: 'パソコンの定型作業を、ソフトに自動でやらせる仕組み。', abbr: { full: 'Robotic Process Automation', ja: 'ロボットによる業務の自動化' } },
+]
+
+// 略語の元の英語。GLOSSARY の term と同じ文字で書くと、用語集に表示される。
+// full = 元の英語、ja = 日本語訳、note = 補足
+export const ABBR = {
+  'CPU': { full: 'Central Processing Unit', ja: '中央処理装置' },
+  'メモリ(RAM)': { full: 'Random Access Memory', ja: '随時に読み書きできる記憶装置', note: '「Random Access」は、好きな場所に直接アクセスできるという意味。' },
+  'SSD': { full: 'Solid State Drive', ja: '固体(半導体)ドライブ', note: '回転する部品がなく、固体の部品だけでできているので Solid State。' },
+  'HDD': { full: 'Hard Disk Drive', ja: 'ハードディスクドライブ' },
+  'GPU': { full: 'Graphics Processing Unit', ja: '画像処理装置' },
+  'VRAM': { full: 'Video RAM', ja: '映像用のRAM' },
+  'BTO': { full: 'Build To Order', ja: '注文に応じて組み立てる' },
+  'OS': { full: 'Operating System', ja: '運用・操作するための基本ソフト' },
+  'NAS': { full: 'Network Attached Storage', ja: 'ネットワークにつないだ保存装置' },
+  'VPN': { full: 'Virtual Private Network', ja: '仮想的な専用ネットワーク' },
+  'API': { full: 'Application Programming Interface', ja: 'アプリ同士をつなぐ接点(窓口)', note: 'Interface = 接点・窓口。' },
+  'HTML / CSS / JavaScript': { full: 'HyperText Markup Language / Cascading Style Sheets', ja: 'HTML=文書の構造を記す言語 / CSS=見た目を指定する書式', note: 'JavaScriptは略語ではなく、言語の名前。' },
+  'LLM': { full: 'Large Language Model', ja: '大規模言語モデル' },
+  'ローカルLLM': { full: 'Local Large Language Model', ja: '手元(ローカル)で動かす大規模言語モデル' },
+  'Linux': { full: '(略語ではない)', ja: '作者リーナス・トーバルズ(Linus)の名前と、Unixに由来する名前' },
+  'Wi-Fi': { full: '(正式な略語ではない)', ja: '無線LANの規格につけられた商標名', note: 'Wireless Fidelityの略と説明されることもあるが、実際には商標名。' },
+}
+
+// 略語によく出てくる英単語。意味を知ると、略語を覚えやすい
+export const WORDS = [
+  { en: 'Central', ja: '中央' },
+  { en: 'Processing', ja: '処理' },
+  { en: 'Unit', ja: '装置・単位' },
+  { en: 'Memory', ja: '記憶' },
+  { en: 'Random Access', ja: '好きな場所に直接アクセスできる' },
+  { en: 'Graphics', ja: '画像・図形' },
+  { en: 'Solid State', ja: '固体(動く部品がない)' },
+  { en: 'Drive', ja: '駆動装置(データを出し入れする装置)' },
+  { en: 'Operating System', ja: '運用・操作のための基本ソフト' },
+  { en: 'Network', ja: '網・つながり' },
+  { en: 'Virtual', ja: '仮想の(実体はないが、そう見える)' },
+  { en: 'Private', ja: '専用の・非公開の' },
+  { en: 'Local', ja: '手元の・その場所の' },
+  { en: 'Area', ja: '範囲・地域' },
+  { en: 'Interface', ja: '接点・窓口' },
+  { en: 'Application', ja: '応用・アプリ(特定の目的のソフト)' },
+  { en: 'Programming', ja: 'プログラムを書くこと' },
+  { en: 'Language', ja: '言語' },
+  { en: 'Model', ja: '模型・型(AIの頭脳にあたるデータ)' },
+  { en: 'Large', ja: '大きい' },
 ]
 
 // 今日の豆知識。毎日2つ、日付で入れ替わる

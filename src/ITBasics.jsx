@@ -1,5 +1,8 @@
 import { useState } from 'react'
-import { FIELDS, GLOSSARY, TIPS } from './itbasics.js'
+import { ABBR, FIELDS, GLOSSARY, TIPS, WORDS } from './itbasics.js'
+
+// 略語の情報を、用語集の各項目に合体させる(検索でも元の英語がヒットする)
+const TERMS = GLOSSARY.map((t) => ({ ...t, abbr: t.abbr ?? ABBR[t.term] }))
 
 const TIPS_PER_DAY = 2
 const FIELD_NAME = Object.fromEntries(FIELDS.map((f) => [f.id, f.name]))
@@ -19,8 +22,10 @@ export default function ITBasics() {
   const field = FIELDS.find((f) => f.id === fieldId)
   const q = query.trim().toLowerCase()
   const terms = q
-    ? GLOSSARY.filter((t) => `${t.term} ${t.body}`.toLowerCase().includes(q))
-    : GLOSSARY
+    ? TERMS.filter((t) =>
+        `${t.term} ${t.body} ${t.abbr?.full ?? ''} ${t.abbr?.ja ?? ''}`.toLowerCase().includes(q),
+      )
+    : TERMS
 
   return (
     <div>
@@ -75,11 +80,20 @@ export default function ITBasics() {
         </details>
       ))}
 
-      <h4 className="guide-sub">用語集(検索できます)</h4>
+      <h4 className="guide-sub">略語によく出てくる英単語(意味を知ると覚えやすい)</h4>
+      <div className="words">
+        {WORDS.map((w) => (
+          <span key={w.en} className="word">
+            <b>{w.en}</b> = {w.ja}
+          </span>
+        ))}
+      </div>
+
+      <h4 className="guide-sub">用語集(検索できます。英語でも探せます)</h4>
       <input
         className="search"
         type="search"
-        placeholder="例: メモリ、VPN、API"
+        placeholder="例: メモリ、VPN、Processing"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
@@ -87,7 +101,14 @@ export default function ITBasics() {
       {terms.map((t) => (
         <div key={t.term} className="term">
           <b>{t.term}</b>
+          {t.abbr && (
+            <span className="abbr">
+              {t.abbr.full}
+              {t.abbr.ja && ` ＝ ${t.abbr.ja}`}
+            </span>
+          )}
           <span>{t.body}</span>
+          {t.abbr?.note && <span className="abbr-note">💡 {t.abbr.note}</span>}
         </div>
       ))}
 
