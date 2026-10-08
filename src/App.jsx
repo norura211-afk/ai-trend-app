@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import Guide from './Guide.jsx'
 import Spotlight from './Spotlight.jsx'
+import ITBasics from './ITBasics.jsx'
 
 // カテゴリの一覧。あとから増やしやすいようにデータとして分けている
 // (id は scripts/feeds.js の category と合わせる)
@@ -10,6 +11,7 @@ const CATEGORIES = [
   { id: 'tech', label: '技術ニュース', icon: '🧠', desc: '新モデル・論文・ツールの発表' },
   { id: 'usecase', label: '話題の活用事例', icon: '💡', desc: 'SNSなどで注目されている使い方' },
   { id: 'guide', label: '使いこなしガイド', icon: '📚', desc: 'Claude・ChatGPT・Geminiの機能と時短ワザ(いつ見ても役立つ基本)', isGuide: true },
+  { id: 'it', label: 'PC・IT入門', icon: '💻', desc: 'パソコンの中身・OS・セキュリティ・プログラミング・AIとPCの基礎', isIT: true },
   { id: 'economy', label: '経済・世界情勢', icon: '🌏', desc: '株・規制・国際動向' },
   { id: 'gear', label: '買うもの・機材', icon: '🖥️', desc: 'GPU・自宅サーバーなどの環境づくり' },
 ]
@@ -35,7 +37,7 @@ function App() {
   const active = CATEGORIES.find((c) => c.id === activeId)
   const articles = data?.articles?.[activeId] ?? []
   // 記事ではなく、固定の内容を出すタブ(ガイド・今日の活用例)
-  const isStatic = active.isGuide || active.isSpotlight
+  const isStatic = active.isGuide || active.isSpotlight || active.isIT
   const today = new Date().toLocaleDateString('ja-JP', {
     year: 'numeric', month: 'long', day: 'numeric', weekday: 'short',
   })
@@ -67,6 +69,7 @@ function App() {
         <p className="desc">{active.desc}</p>
 
         {active.isGuide && <Guide />}
+        {active.isIT && <ITBasics />}
         {active.isSpotlight && <Spotlight articles={data?.articles?.usecase ?? []} />}
 
         {!isStatic && error && (
