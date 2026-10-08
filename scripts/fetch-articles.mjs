@@ -2,7 +2,7 @@
 // 実行: npm run fetch
 import { XMLParser } from 'fast-xml-parser'
 import { mkdir, writeFile } from 'node:fs/promises'
-import { FEEDS, MAX_PER_CATEGORY, MAX_OVERRIDE, MAX_PER_SOURCE } from './feeds.js'
+import { FEEDS, MAX_PER_CATEGORY, MAX_OVERRIDE, MAX_PER_SOURCE, MAX_PER_SOURCE_OVERRIDE } from './feeds.js'
 
 const parser = new XMLParser({ ignoreAttributes: false, attributeNamePrefix: '@_' })
 
@@ -90,7 +90,7 @@ all
     const list = (byCategory[a.category] ??= [])
     const used = (bySource[a.source] ??= 0)
     // 1つの取得元だけで枠が埋まらないよう、取得元ごとにも上限を設ける
-    if (used >= MAX_PER_SOURCE) return
+    if (used >= (MAX_PER_SOURCE_OVERRIDE[a.category] ?? MAX_PER_SOURCE)) return
     if (list.length < (MAX_OVERRIDE[a.category] ?? MAX_PER_CATEGORY)) {
       list.push(a)
       bySource[a.source] = used + 1
