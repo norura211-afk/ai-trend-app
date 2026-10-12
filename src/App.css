@@ -315,6 +315,158 @@
   background: #12324a;
 }
 
+/* PC・IT入門: クイズとレベル */
+.level-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  border: 1px solid #1f2b4a;
+  border-radius: 8px;
+  background: #121a33;
+  color: #c3cfe6;
+}
+
+.level-bar b {
+  color: #f59e0b;
+}
+
+.level-bar small {
+  color: #8ea2c8;
+}
+
+.lv-badge {
+  margin-left: 8px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: #f59e0b;
+  color: #0b1020;
+  font-size: 0.75rem;
+}
+
+.more.start {
+  margin-bottom: 8px;
+  padding: 14px;
+  border-color: #5ee6ff;
+  font-size: 1.05rem;
+}
+
+.more:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.quiz-sub {
+  color: #8ea2c8;
+}
+
+.quiz-sub b {
+  color: #5ee6ff;
+}
+
+.quiz-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 8px;
+}
+
+.quiz-field-btn {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px;
+  border: 1px solid #1f2b4a;
+  border-radius: 8px;
+  background: #121a33;
+  color: #e6edf7;
+  text-align: left;
+  cursor: pointer;
+}
+
+.quiz-field-btn:hover {
+  border-color: #5ee6ff;
+}
+
+.quiz-field-btn small {
+  color: #8ea2c8;
+}
+
+.quiz-box {
+  padding: 14px 16px;
+  border: 1px solid #1f2b4a;
+  border-radius: 8px;
+  background: #121a33;
+}
+
+.quiz-head {
+  display: flex;
+  justify-content: space-between;
+  color: #8ea2c8;
+  font-size: 0.85rem;
+}
+
+.quiz-field {
+  margin: 4px 0;
+  color: #f59e0b;
+  font-size: 0.8rem;
+}
+
+.quiz-q {
+  margin: 4px 0 12px;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.choice {
+  display: block;
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 10px 12px;
+  border: 1px solid #1f2b4a;
+  border-radius: 8px;
+  background: #0b1020;
+  color: #e6edf7;
+  text-align: left;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.choice:hover:not(:disabled) {
+  border-color: #5ee6ff;
+}
+
+.choice:disabled {
+  cursor: default;
+}
+
+.choice.correct {
+  border-color: #34d399;
+  background: #0f3a2c;
+}
+
+.choice.wrong {
+  border-color: #f87171;
+  background: #3a1620;
+}
+
+.quiz-explain {
+  margin-top: 8px;
+  padding: 10px 12px;
+  border-left: 3px solid #5ee6ff;
+  background: #0b1020;
+  color: #c3cfe6;
+}
+
+.quiz-explain p {
+  margin: 6px 0 10px;
+}
+
+.quiz-msg {
+  color: #c3cfe6;
+}
+
 /* PC・IT入門 */
 .tip-card {
   border-left-color: #f59e0b;
