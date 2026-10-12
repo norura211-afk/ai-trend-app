@@ -1,8 +1,12 @@
 // RSSから記事を集めて public/articles.json に保存するスクリプト。
 // 実行: npm run fetch
 import { XMLParser } from 'fast-xml-parser'
-import { mkdir, writeFile } from 'node:fs/promises'
-import { FEEDS, MAX_PER_CATEGORY, MAX_OVERRIDE, MAX_PER_SOURCE, MAX_PER_SOURCE_OVERRIDE } from './feeds.js'
+import { mkdir, readFile, writeFile } from 'node:fs/promises'
+import {
+  FEEDS, MAX_PER_CATEGORY, MAX_OVERRIDE, MAX_PER_SOURCE, MAX_PER_SOURCE_OVERRIDE,
+  CURATED, KEEP_DAYS, KEEP_MAX,
+} from './feeds.js'
+import { scoreArticles, dedupeSameSite, HOT_SCORE } from './score.js'
 
 const parser = new XMLParser({ ignoreAttributes: false, attributeNamePrefix: '@_' })
 
@@ -44,7 +48,8 @@ function parseItems(xml) {
     const date = text(it.pubDate ?? it.published ?? it.updated ?? it['dc:date'])
     const body = it.description ?? it.summary ?? it.content ?? it['content:encoded']
     return {
-      title: stripHtml(it.title),
+      // 「[ITmedia NEWS] ...」のような、先頭の[ ]の部分は取り除く
+      title: stripHtml(it.title).replace(/^\[[^\]]+\]\s*/, ''),
       url: link.trim(),
       date: date ? new Date(date).toISOString() : null,
       excerpt: stripHtml(body).slice(0, 200),
@@ -97,10 +102,42 @@ all
     }
   })
 
+// 前回の記事を読み込む。自動更新では、公開中の articles.json を先にダウンロードしてある
+let previous = {}
+try {
+  previous = JSON.parse(await readFile('public/articles.json', 'utf8')).articles ?? {}
+} catch {
+  // 前回のファイルがなければ、新規として扱う
+}
+
+const nowIso = new Date().toISOString()
+const cutoff = Date.now() - KEEP_DAYS * 86400000
+
+// 注目度ニュースのカテゴリは、前回までの記事を引き継ぐ(未読を、日付が変わっても残すため)
+for (const category of CURATED) {
+  const prevMap = new Map((previous[category] ?? []).map((a) => [a.url, a]))
+  const merged = new Map()
+
+  for (const a of byCategory[category] ?? []) {
+    merged.set(a.url, { ...a, firstSeen: prevMap.get(a.url)?.firstSeen ?? nowIso })
+  }
+  for (const a of prevMap.values()) {
+    const seenAt = new Date(a.firstSeen ?? a.date ?? 0).getTime()
+    if (!merged.has(a.url) && seenAt >= cutoff) merged.set(a.url, a)
+  }
+
+  // 前回保存した題名に[ ]の飾りが残っていても、ここできれいにする
+  const cleaned = [...merged.values()].map((a) => ({ ...a, title: a.title.replace(/^\[[^\]]+\]\s*/, '') }))
+
+  byCategory[category] = scoreArticles(dedupeSameSite(cleaned))
+    .sort((a, b) => b.score - a.score || (b.date ?? '').localeCompare(a.date ?? ''))
+    .slice(0, KEEP_MAX)
+}
+
 await mkdir('public', { recursive: true })
 await writeFile(
   'public/articles.json',
-  JSON.stringify({ updatedAt: new Date().toISOString(), articles: byCategory }, null, 2),
+  JSON.stringify({ updatedAt: nowIso, hotScore: HOT_SCORE, articles: byCategory }, null, 2),
   'utf8',
 )
 console.log('保存しました: public/articles.json')

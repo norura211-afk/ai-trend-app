@@ -30,6 +30,8 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      # 公開中の記事データを先にダウンロードし、未読の記事を引き継ぐ(初回など、取れなくても続行)
+      - run: curl -sf -o public/articles.json https://norura211-afk.github.io/ai-trend-app/articles.json || true
       - run: npm run fetch
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3

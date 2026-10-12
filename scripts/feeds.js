@@ -71,7 +71,12 @@ export const FEEDS = [
 
 // 1カテゴリあたり、最大で何件残すか(カテゴリごとに変えたいときは MAX_OVERRIDE へ)
 export const MAX_PER_CATEGORY = 20
-export const MAX_OVERRIDE = { usecase: 80 }
+export const MAX_OVERRIDE = { usecase: 80, tech: 30, economy: 30 }
+
+// 「注目度順・未読の持ち越し」を使うカテゴリ
+export const CURATED = ['tech', 'economy']
+export const KEEP_DAYS = 14 // 何日分の記事を引き継ぐか
+export const KEEP_MAX = 100 // 引き継いで保存する最大件数(カテゴリごと)
 // 1つの取得元(例: note ChatGPT活用)から出す最大件数
 export const MAX_PER_SOURCE = 4
 // 取得元が少ないカテゴリは、1つの取得元から多めに出す

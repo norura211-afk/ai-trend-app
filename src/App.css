@@ -234,6 +234,87 @@
   color: var(--accent);
 }
 
+/* ニュース(注目度・未読・注) */
+.news-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  color: #c3cfe6;
+}
+
+.news-bar b {
+  color: #5ee6ff;
+}
+
+.card.hot {
+  border-left-color: #f59e0b;
+  box-shadow: 0 0 10px #f59e0b22;
+}
+
+.card.read {
+  opacity: 0.6;
+}
+
+.hot-badge {
+  margin-bottom: 6px;
+  color: #f59e0b;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.hot-badge span {
+  margin-left: 6px;
+  color: #8ea2c8;
+  font-weight: normal;
+}
+
+.card .excerpt {
+  color: #c3cfe6;
+  font-size: 0.9rem;
+}
+
+.notes {
+  margin: 6px 0 8px;
+  padding: 8px 12px;
+  list-style: none;
+  border-radius: 6px;
+  background: #0b1020;
+  font-size: 0.85rem;
+  color: #c3cfe6;
+}
+
+.notes li {
+  margin-bottom: 4px;
+}
+
+.notes b {
+  color: #5ee6ff;
+}
+
+.card-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.more {
+  display: block;
+  width: 100%;
+  margin: 4px 0 16px;
+  padding: 10px;
+  border: 1px solid #1f2b4a;
+  border-radius: 8px;
+  background: transparent;
+  color: #5ee6ff;
+  cursor: pointer;
+}
+
+.more:hover {
+  background: #12324a;
+}
+
 /* PC・IT入門 */
 .tip-card {
   border-left-color: #f59e0b;

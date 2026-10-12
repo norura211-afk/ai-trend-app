@@ -3,16 +3,17 @@ import './App.css'
 import Guide from './Guide.jsx'
 import Spotlight from './Spotlight.jsx'
 import ITBasics from './ITBasics.jsx'
+import NewsList from './NewsList.jsx'
 
 // カテゴリの一覧。あとから増やしやすいようにデータとして分けている
 // (id は scripts/feeds.js の category と合わせる)
 const CATEGORIES = [
   { id: 'today', label: '今日の活用例', icon: '🎯', desc: '毎日3つの機能を、業種や場面ごとの具体例で紹介', isSpotlight: true },
-  { id: 'tech', label: '技術ニュース', icon: '🧠', desc: '新モデル・論文・ツールの発表' },
+  { id: 'tech', label: '技術ニュース', icon: '🧠', desc: '新モデル・論文・ツールの発表', curated: true },
   { id: 'usecase', label: '話題の活用事例', icon: '💡', desc: 'SNSなどで注目されている使い方' },
   { id: 'guide', label: '使いこなしガイド', icon: '📚', desc: 'Claude・ChatGPT・Geminiの機能と時短ワザ(いつ見ても役立つ基本)', isGuide: true },
   { id: 'it', label: 'PC・IT入門', icon: '💻', desc: 'パソコンの中身・OS・セキュリティ・プログラミング・AIとPCの基礎', isIT: true },
-  { id: 'economy', label: '経済・世界情勢', icon: '🌏', desc: '株・規制・国際動向' },
+  { id: 'economy', label: '経済・世界情勢', icon: '🌏', desc: '株・規制・国際動向', curated: true },
   { id: 'gear', label: '買うもの・機材', icon: '🖥️', desc: 'GPU・自宅サーバーなどの環境づくり' },
 ]
 
@@ -82,7 +83,11 @@ function App() {
           <p className="notice">このカテゴリの記事はまだありません。</p>
         )}
 
-        {!isStatic && articles.map((a) => (
+        {!isStatic && active.curated && articles.length > 0 && (
+          <NewsList key={activeId} articles={articles} hotScore={data?.hotScore} />
+        )}
+
+        {!isStatic && !active.curated && articles.map((a) => (
           <article key={a.url} className="card">
             <h3>
               <a href={a.url} target="_blank" rel="noreferrer">{a.title}</a>
